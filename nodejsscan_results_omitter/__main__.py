@@ -1,4 +1,5 @@
 import json
+import os
 import sys
 from fnmatch import fnmatch 
 from pprint import pprint
@@ -24,10 +25,11 @@ def parse_results(results, config):
     excluded_hashes = config.get("exclude", {}).get("hash", [])
     excluded_titles = config.get("exclude", {}).get("title", [])
 
+    cwd = os.getcwd()
     for category in results['sec_issues'].keys():
         for issue in results['sec_issues'][category]:
             for path in excluded_paths:
-                if fnmatch(issue["path"], f"/src/{path}"):
+                if fnmatch(issue["path"], f"{cwd}/{path}"):
                     items_to_delete.append(issue)
                     results["total_count"]["sec"] -= 1
             for issue_hash in excluded_hashes:
