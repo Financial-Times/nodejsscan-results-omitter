@@ -1,0 +1,1 @@
+# nodejsscan-results-omitter
