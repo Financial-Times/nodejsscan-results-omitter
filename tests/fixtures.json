@@ -1,0 +1,113 @@
+{
+    "normal_results": {
+        "files": [
+            {
+                "/results.json": "/Users/conor/Documents/Github/okta-express-middleware/results.json"
+            },
+            {
+                "/index.js": "/Users/conor/Documents/Github/okta-express-middleware/index.js"
+            },
+            {
+                "/package-lock.json": "/Users/conor/Documents/Github/okta-express-middleware/package-lock.json"
+            },
+            {
+                "/package.json": "/Users/conor/Documents/Github/okta-express-middleware/package.json"
+            },
+            {
+                "/.eslintrc.json": "/Users/conor/Documents/Github/okta-express-middleware/.eslintrc.json"
+            },
+            {
+                "/test/app.test.js": "/Users/conor/Documents/Github/okta-express-middleware/test/app.test.js"
+            },
+            {
+                "/test/app.js": "/Users/conor/Documents/Github/okta-express-middleware/test/app.js"
+            },
+            {
+                "/test/util/sessionCookies.js": "/Users/conor/Documents/Github/okta-express-middleware/test/util/sessionCookies.js"
+            },
+            {
+                "/venv/lib/python3.7/site-packages/core/rules.xml": "/Users/conor/Documents/Github/okta-express-middleware/venv/lib/python3.7/site-packages/core/rules.xml"
+            },
+            {
+                "/venv/lib/python3.7/site-packages/setuptools/script.tmpl": "/Users/conor/Documents/Github/okta-express-middleware/venv/lib/python3.7/site-packages/setuptools/script.tmpl"
+            },
+            {
+                "/venv/lib/python3.7/site-packages/setuptools/script (dev).tmpl": "/Users/conor/Documents/Github/okta-express-middleware/venv/lib/python3.7/site-packages/setuptools/script (dev).tmpl"
+            },
+            {
+                "/venv/lib/python3.7/site-packages/setuptools/command/launcher manifest.xml": "/Users/conor/Documents/Github/okta-express-middleware/venv/lib/python3.7/site-packages/setuptools/command/launcher manifest.xml"
+            },
+            {
+                "/.circleci/config.yml": "/Users/conor/Documents/Github/okta-express-middleware/.circleci/config.yml"
+            },
+            {
+                "/src/JwtVerifier.js": "/Users/conor/Documents/Github/okta-express-middleware/src/JwtVerifier.js"
+            }
+        ],
+        "good_finding": {},
+        "missing_sec_header": {
+            "Web Security": [
+                {
+                    "description": "X-Content-Type-Options header prevents Internet Explorer and Google Chrome from MIME-sniffing a response away from the declared content-type.",
+                    "tag": "web",
+                    "title": "Missing Security Header - X-Content-Type-Options"
+                },
+                {
+                    "description": "Remove the X-Powered-By header to prevent information gathering.",
+                    "tag": "web",
+                    "title": "Information Disclosure - X-Powered-By"
+                }
+            ]
+        },
+        "sec_issues": {
+            "Application Related": [
+                {
+                    "description": "A hardcoded secret was identified.",
+                    "filename": "app.js",
+                    "line": 10,
+                    "lines": "const cookieParser = require('cookie-parser');\nconst OktaMiddleware = require('../index.js');\n\nconst okta = new OktaMiddleware({\n    client_id: 'dummyClientId',\n    client_secret: 'dummyClientSecret',\n    issuer: 'https://okta.okta.com/oauth2/default',\n    appBaseUrl: 'http://127.0.0.1:8080',\n    scope: 'openid name offline_access',\n});",
+                    "path": "/Users/conor/Documents/Github/okta-express-middleware/test/app.js",
+                    "sha2": "2809cad0a8c69d250e5c54b056f4a06073bea5eb76000810e661b8316904d87c",
+                    "tag": "node",
+                    "title": "Secret Hardcoded"
+                },
+                {
+                    "description": "A hardcoded secret was identified.",
+                    "filename": "app.js",
+                    "line": 17,
+                    "lines": "  appBaseUrl: 'http://127.0.0.1:8080',\n      scope: 'openid name offline_access',\n  });\n\n  app.use(session({\n      secret: 'secret',\n      maxAge: 12 * 3600 * 1000, // 12 hours\n      httpOnly: true,\n  }));",
+                    "path": "/Users/conor/Documents/Github/okta-express-middleware/test/app.js",
+                    "sha2": "da0caf9f5c5eba0384ae977316d05d943e4166cdffdba3b36717d830dd96e407",
+                    "tag": "node",
+                    "title": "Secret Hardcoded"
+                }
+            ]
+        },
+        "total_count": {
+            "good": 0,
+            "mis": 2,
+            "sec": 10
+        },
+        "vuln_count": {
+            "Deserialization Remote Code Injection": 1,
+            "Express BodyParser Tempfile Creation Issue": 2,
+            "Handlebars Unescaped String": 1,
+            "Secret Hardcoded": 6
+        }
+    },
+    "exclude_test_dir_config": {
+        "exclude": {
+            "path": ["test/*"]
+        }
+    },
+    "normal_issue": {
+        "description": "A hardcoded secret was identified.",
+        "filename": "app.js",
+        "line": 10,
+        "lines": "const cookieParser = require('cookie-parser');\nconst OktaMiddleware = require('../index.js');\n\nconst okta = new OktaMiddleware({\n    client_id: 'dummyClientId',\n    client_secret: 'dummyClientSecret',\n    issuer: 'https://okta.okta.com/oauth2/default',\n    appBaseUrl: 'http://127.0.0.1:8080',\n    scope: 'openid name offline_access',\n});",
+        "path": "/Users/conor/Documents/Github/okta-express-middleware/test/app.js",
+        "sha2": "2809cad0a8c69d250e5c54b056f4a06073bea5eb76000810e661b8316904d87c",
+        "tag": "node",
+        "title": "Secret Hardcoded"
+    }
+}

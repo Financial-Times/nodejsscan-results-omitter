@@ -7,7 +7,7 @@ from pprint import pprint
 CONFIG_FILE = ".nodejsscan.json"
 RESULTS_FILE = "results.json"
 
-
+cwd = os.getcwd()
 def load_json(file_name):
     try:
         with open(file_name, "r") as f:
@@ -16,6 +16,14 @@ def load_json(file_name):
     except FileNotFoundError:
         return {}
 
+
+def remove_paths(results, paths, issue):
+    items_to_delete = []
+    for path in paths:
+        if fnmatch(name=issue["path"], pat=f"{cwd}/{path}"):
+            items_to_delete.append(issue)
+            results["total_count"]["sec"] -= 1
+    return items_to_delete
 
 def parse_results(results, config):
     exit_code = 0
