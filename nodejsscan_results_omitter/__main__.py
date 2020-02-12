@@ -21,7 +21,7 @@ def load_json(file_name):
 
 def remove_issue_if_path_match(paths, issue):
     for path in paths:
-        if fnmatch(name=issue["path"], pat=f"{cwd}/{path}"):
+        if fnmatch(name=issue["path"], pat=f"{path}"):
             return True
     return False
 
