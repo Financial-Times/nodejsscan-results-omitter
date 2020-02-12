@@ -1,2 +1,3 @@
+nodejsscan
 pytest
 pytest-cov
