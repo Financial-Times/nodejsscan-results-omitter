@@ -2,10 +2,12 @@ from nodejsscan_results_omitter import parse_results
 from nodejsscan_results_omitter import remove_issue_if_path_match
 from nodejsscan_results_omitter import remove_issue_if_hash_match
 from nodejsscan_results_omitter import remove_issue_if_title_match
+from nodejsscan_results_omitter import load_json
+from nodejsscan_results_omitter import main
 import pytest
 import json
 import os
-
+import sys
 
 @pytest.fixture
 def resources():
@@ -48,3 +50,19 @@ def test_remove_issue_if_hash_match(config, normal_issue):
 def test_remove_issue_if_title_match(config, normal_issue):
     delete_issue = remove_issue_if_title_match(config["exclude"]["title"], normal_issue)
     assert delete_issue
+
+def test_json_file():
+    assert load_json(os.path.dirname(__file__) + "/fixtures.json")
+
+def test_unattached_file():
+    assert load_json('foo') == {}
+
+def test_invalid_file_type():
+    with pytest.raises(json.decoder.JSONDecodeError):
+        load_json(os.path.dirname(__file__) + "/../requirements.txt")
+
+def test_main_system_exit():
+    with pytest.raises(SystemExit) as pytest_wrapped_e:
+        main()
+    assert pytest_wrapped_e.type == SystemExit
+    assert pytest_wrapped_e.value.code == 1
