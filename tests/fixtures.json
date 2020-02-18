@@ -1,0 +1,10 @@
+{
+    "config": {
+        "exclude": {
+            "path": ["tests/dvna/*"],
+            "hash": ["f90dc702a25adb975b2b51cef967e80f05a1baec7af9fa20fb902e7dae82f97f"],
+            "title": ["Secret Hardcoded"]
+
+        }
+    }
+}
