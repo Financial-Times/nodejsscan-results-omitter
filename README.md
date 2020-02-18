@@ -13,7 +13,7 @@ This module was developed for Python3 and doesn't use any non standard modules.
 ## Usage
 This module will look for a file called `results.json` in the current working directory. It will parse the file and if there are any security issues it will return an exit code of 1. This is useful if you want to fail a CI build when security issues are present.
 
-If you want to ignore issues based on path, type of issue, or """""hash of issue""""" then you can choose to ignore them. To make use of this functionality, create a configuration file called ```.nodejsscan.json``` in the root directiory of the repository. Examples of how to add entries to exclude paths, findings and titles is shown below:
+If you want to ignore issues based on path, type of issue, or issue hash then you can choose to ignore them. To make use of this functionality, create a configuration file called ```.nodejsscan.json``` in the root directiory of the repository. Examples of how to add entries to exclude paths, findings and titles is shown below:
 
 ```
 {
