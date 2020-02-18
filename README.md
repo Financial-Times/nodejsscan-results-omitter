@@ -1,6 +1,6 @@
 # nodejsscan-results-omitter
 
-A python script which takes the results from [NodeJsScan](https://github.com/ajinabraham/NodeJsScan).It allows you to omit findings from certain directories as well as skipping any false positives that may have been found during the scan.
+A python script which takes the results from [NodeJsScan](https://github.com/ajinabraham/NodeJsScan). It allows you to omit findings from certain directories as well as skipping any false positives that may have been found during the scan.
 
 This was developed for and used in [nodejsscan-orb](https://github.com/Financial-Times/nodejsscan-orb) so this module is automatically included when you use the orb. In most cases, you will **NOT** have to install this module yourself.
 
