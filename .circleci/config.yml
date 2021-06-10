@@ -1,5 +1,18 @@
 version: 2.1
 
+executors:
+  python:
+    docker:
+      - image: cimg/python:3.9.5-node
+
+commands:
+  fossa:
+    steps:
+      - run: |
+          curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/spectrometer/master/install.sh | bash
+      - checkout
+      - run: fossa analyze && fossa test
+
 jobs:
   toxify:
       docker:
@@ -7,8 +20,13 @@ jobs:
       steps:
         - checkout
         - run: pip install tox && tox
+  fossa_scan:
+    executor: python
+    steps:
+      - fossa
 
 workflows:
   run-tests:
     jobs:
       - toxify
+      - fossa_scan
