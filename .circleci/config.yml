@@ -1,5 +1,16 @@
 version: 2.1
 
+orbs:
+  change-api: financial-times/change-api@0.25.0
+
+references:
+  filter_only_main: &filter_only_main
+    branches:
+      only: main
+  filter_ignore_main: &filter_ignore_main
+    branches:
+      ignore: main
+
 jobs:
   toxify:
       docker:
@@ -11,4 +22,21 @@ jobs:
 workflows:
   run-tests:
     jobs:
-      - toxify
+      - toxify:
+          filters:
+            <<: *filter_ignore_main
+  
+  run-tests-trigger-change-api:
+    jobs:
+      - toxify:
+          filters:
+            <<: *filter_only_main
+      - change-api/release-log:
+            changeApiKey: '${CHANGE_API_KEY}'
+            systemCode: 'nodejsscan-orb'
+            environment: 'prod'
+            slackChannels: 'cyber-security-alerts'
+            requires:
+                - toxify
+            filters:
+                <<: *filter_only_main
