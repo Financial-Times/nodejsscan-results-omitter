@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  change-api: financial-times/change-api@0.25.0
+  change-api: financial-times/change-api@1.0.6
 
 references:
   filter_only_main: &filter_only_main
@@ -31,11 +31,11 @@ workflows:
       - toxify:
           filters:
             <<: *filter_only_main
-      - change-api/release-log:
-            changeApiKey: '${CHANGE_API_KEY}'
-            systemCode: 'nodejsscan-orb'
+      - change-api/change-log:
+            context: change-api-orb
+            system-code: 'nodejsscan-orb'
             environment: 'prod'
-            slackChannels: 'cyber-security-alerts'
+            slack-channels: 'cyber-security-alerts'
             requires:
                 - toxify
             filters:
